@@ -7,22 +7,24 @@
     using SharpDX;
     using SharpDX.Direct3D9;
     using SharpDX.Windows;
-    using Mercury.ParticleEngine.Modifiers;
-    using Mercury.ParticleEngine.Profiles;
-    using Mercury.ParticleEngine.Renderers;
+    using Modifiers;
+    using Profiles;
+    using Renderers;
     using System.Threading.Tasks;
     using System.Windows.Input;
 
     static class Program
     {
-        [STAThread]
+		private static List<float> _updateTimes = new List<float>();
+			
+		[STAThread]
         static void Main()
         {
             var worldSize = new Size2(1024, 768);
             var renderSize = new Size2(1920, 1080);
-            const bool windowed = false;
+            const bool windowed = true;
 
-            const int numParticles = 1000000;
+            const int numParticles = 2000000;
             const int numEmitters = 5;
             const int budget = numParticles / numEmitters;
 
@@ -91,7 +93,7 @@
 
             var renderer = new PointSpriteRenderer(device, budget)
             {
-                //EnableFastFade = true
+//                EnableFastFade = true
             };
 
             var texture = Texture.FromFile(device, "Pixel.dds");
@@ -139,6 +141,7 @@
                             Parallel.ForEach(emitters, emitter => emitter.Update(frameTime));
                             updateTimer.Stop();
                             updateTime = (float)updateTimer.Elapsed.TotalSeconds;
+							_updateTimes.Add(updateTime);
                         }),
                         Task.Factory.StartNew(() =>
                         {
@@ -152,6 +155,16 @@
                             }
                             renderTimer.Stop();
                             var renderTime = (float)renderTimer.Elapsed.TotalSeconds;
+
+	                        var totalUpdateTime = 0f;
+//	                        foreach (var time in _updateTimes)
+//	                        {
+//		                        totalUpdateTime += time;
+//	                        }
+//	                        totalUpdateTime /= _updateTimes.Count;
+//
+//							if(_updateTimes.Count > 100)
+//								_updateTimes.RemoveAt(0);
 
                             font.DrawText(null, String.Format("Time:        {0}", totalTimer.Elapsed), 0, 0, Color.White);
                             font.DrawText(null, String.Format("Particles:   {0:n0}", emitters[0].ActiveParticles * numEmitters), 0, 16, Color.White);

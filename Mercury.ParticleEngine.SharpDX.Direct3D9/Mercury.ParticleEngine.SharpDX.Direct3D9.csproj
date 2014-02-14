@@ -21,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -56,12 +57,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Mercury.ParticleEngine.Core\Mercury.ParticleEngine.Core.csproj">
-      <Project>{e7b59af1-5ccf-472b-906a-62bf48e520a8}</Project>
-      <Name>Mercury.ParticleEngine.Core</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -69,6 +64,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\PointSprite.fx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Mercury.ParticleEngine.Core_SSE\Mercury.ParticleEngine.Core_SSE.csproj">
+      <Project>{499a6328-05af-45cd-bd51-16813f1d495d}</Project>
+      <Name>Mercury.ParticleEngine.Core_SSE</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PointSprite1.fx" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildProjectDirectory)\..\.build\nuget.targets" />
