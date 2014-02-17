@@ -27,16 +27,14 @@ namespace Mercury.ParticleEngine.Modifiers
 
 
 	        var i = 0;
-	        while (i < count)
-	        {
-		        var blockLength = Math.Min(YepppConstants.BufferLength, count - i);
+//	        while (i < count)
+//	        {
+//		        var blockLength = Math.Min(YepppConstants.BufferLength, count - i);
 
-				Yeppp.Core.Subtract_V32fV32f_V32f();
+//				Yeppp.Core.Subtract();
 
-		        i += YepppConstants.BufferLength;
-	        }
-
-			
+//		        i += YepppConstants.BufferLength;
+//	        }
 	        
 	        unchecked
 	        {

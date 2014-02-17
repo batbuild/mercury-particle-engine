@@ -69,9 +69,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Mercury.ParticleEngine.Core_SSE\Mercury.ParticleEngine.Core_SSE.csproj">
+    <ProjectReference Include="..\Mercury.ParticleEngine.Core_SSE\Mercury.ParticleEngine.Core.csproj">
       <Project>{499a6328-05af-45cd-bd51-16813f1d495d}</Project>
-      <Name>Mercury.ParticleEngine.Core_SSE</Name>
+      <Name>Mercury.ParticleEngine.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\Mercury.ParticleEngine.SharpDX.Direct3D9\Mercury.ParticleEngine.SharpDX.Direct3D9.csproj">
       <Project>{aca557d3-43a9-424f-a35a-4fb9c93fe4e3}</Project>

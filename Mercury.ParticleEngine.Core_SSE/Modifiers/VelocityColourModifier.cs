@@ -19,7 +19,7 @@
 		        {
 			        var velocity2 = ((particle.VX[i] * particle.VX[i]) + (particle.VY[i] * particle.VY[i]));
 
-			        if (velocity2 >= velocityThreshold2)
+			        if (velocity2 >= velocityThreshold2) 
 			        {
 				        particle.R[i] = VelocityColour.H;
 				        particle.G[i] = VelocityColour.S;

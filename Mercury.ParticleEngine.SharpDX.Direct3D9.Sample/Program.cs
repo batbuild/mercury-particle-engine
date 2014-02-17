@@ -24,7 +24,7 @@
             var renderSize = new Size2(1920, 1080);
             const bool windowed = true;
 
-            const int numParticles = 2000000;
+            const int numParticles = 1000000;
             const int numEmitters = 5;
             const int budget = numParticles / numEmitters;
 

@@ -38,31 +38,18 @@
 
             var vertexElements = new[]
             {
-//                new VertexElement(0, (short)Marshal.OffsetOf(typeof(Particle), "Age"),      DeclarationType.Float1, DeclarationMethod.Default, DeclarationUsage.Color, 1),
-//                new VertexElement(0, (short)Marshal.OffsetOf(typeof(Particle), "Position"), DeclarationType.Float2, DeclarationMethod.Default, DeclarationUsage.Position, 0),
-//                new VertexElement(0, (short)Marshal.OffsetOf(typeof(Particle), "Colour"),   DeclarationType.Float4, DeclarationMethod.Default, DeclarationUsage.Color, 0),
-//                new VertexElement(0, (short)Marshal.OffsetOf(typeof(Particle), "Scale"),    DeclarationType.Float1, DeclarationMethod.Default, DeclarationUsage.PointSize, 0),
-//                new VertexElement(0, (short)Marshal.OffsetOf(typeof(Particle), "Rotation"), DeclarationType.Float1, DeclarationMethod.Default, DeclarationUsage.Color, 2),
-
-//				  new VertexElement(0, 0,     DeclarationType.Float1, DeclarationMethod.Default, DeclarationUsage.Color, 1),
-//                new VertexElement(0, 4,		DeclarationType.Float2, DeclarationMethod.Default, DeclarationUsage.Position, 0),
-//                new VertexElement(0, 12,	DeclarationType.Float4, DeclarationMethod.Default, DeclarationUsage.Color, 0),
-//                new VertexElement(0, 28,    DeclarationType.Float1, DeclarationMethod.Default, DeclarationUsage.PointSize, 0),
-//                new VertexElement(0, 32,	DeclarationType.Float1, DeclarationMethod.Default, DeclarationUsage.Color, 2),
-
-					new VertexElement(0, 0,     DeclarationType.Float1, DeclarationMethod.Default, DeclarationUsage.Color, 0),					// Age
-					new VertexElement(1, 0,     DeclarationType.Float1, DeclarationMethod.Default, DeclarationUsage.Position, 0),				// X
-					new VertexElement(2, 0,		DeclarationType.Float1, DeclarationMethod.Default, DeclarationUsage.Position, 1),				// Y
-					new VertexElement(3, 0,		DeclarationType.Float1, DeclarationMethod.Default, DeclarationUsage.Color, 1),					// R
-					new VertexElement(4, 0,		DeclarationType.Float1, DeclarationMethod.Default, DeclarationUsage.Color, 2),					// R
-					new VertexElement(5, 0,		DeclarationType.Float1, DeclarationMethod.Default, DeclarationUsage.Color, 3),					// R
-					new VertexElement(6, 0,		DeclarationType.Float1, DeclarationMethod.Default, DeclarationUsage.PointSize, 0),				// Size
-					new VertexElement(7, 0,		DeclarationType.Float1, DeclarationMethod.Default, DeclarationUsage.TextureCoordinate, 0),		// Rotation
+				new VertexElement(0, 0,     DeclarationType.Float1, DeclarationMethod.Default, DeclarationUsage.Color, 0),					// Age
+				new VertexElement(1, 0,     DeclarationType.Float1, DeclarationMethod.Default, DeclarationUsage.Position, 0),				// X
+				new VertexElement(2, 0,		DeclarationType.Float1, DeclarationMethod.Default, DeclarationUsage.Position, 1),				// Y
+				new VertexElement(3, 0,		DeclarationType.Float1, DeclarationMethod.Default, DeclarationUsage.Color, 1),					// R
+				new VertexElement(4, 0,		DeclarationType.Float1, DeclarationMethod.Default, DeclarationUsage.Color, 2),					// G
+				new VertexElement(5, 0,		DeclarationType.Float1, DeclarationMethod.Default, DeclarationUsage.Color, 3),					// B
+				new VertexElement(6, 0,		DeclarationType.Float1, DeclarationMethod.Default, DeclarationUsage.PointSize, 0),				// Size
+				new VertexElement(7, 0,		DeclarationType.Float1, DeclarationMethod.Default, DeclarationUsage.TextureCoordinate, 0),		// Rotation
                 VertexElement.VertexDeclarationEnd
             };
 
-//            _effect = Effect.FromString(device, Resources.PointSpriteShader, ShaderFlags.PartialPrecision);
-            _effect = Effect.FromString(device, Resources.PointSpriteShader1, ShaderFlags.PartialPrecision);
+            _effect = Effect.FromString(device, Resources.PointSpriteShader, ShaderFlags.PartialPrecision);
 
             _vertexDeclaration = new VertexDeclaration(device, vertexElements);
         }
@@ -95,8 +82,6 @@
             _effect.Technique = technique;
             _effect.Begin(FX.DoNotSaveState);
             _effect.BeginPass(0);
-
-//            _device.SetStreamSource(0, _vertexBuffer, 0, Particle.SizeInBytes);
 
             _device.SetStreamSource(0, _vertexBuffer, 0, sizeof(float));
             _device.SetStreamSource(1, _vertexBuffer, emitter.ActiveParticles * sizeof(float), sizeof(float));
