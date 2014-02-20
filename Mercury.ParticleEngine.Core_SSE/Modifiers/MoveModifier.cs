@@ -4,7 +4,7 @@ namespace Mercury.ParticleEngine.Modifiers
 {
     public class MoveModifier : Modifier
     {
-        protected internal override unsafe void Update(float elapsedSeconds, ref Particle particle, int index, int count)
+        protected internal override unsafe void Update(float elapsedSeconds, ref Particle particle, int count)
         {
 			var velXIntegral = new float[YepppConstants.BufferLength];
 			var velYIntegral = new float[YepppConstants.BufferLength];

@@ -16,11 +16,11 @@
         public Axis Direction { get; set; }
         public float Strength { get; set; }
 
-        protected internal override unsafe void Update(float elapsedSeconds, ref Particle particle, int index, int count)
+        protected internal override unsafe void Update(float elapsedSeconds, ref Particle particle, int count)
         {
             var vector = Direction * (Strength * elapsedSeconds);
 
-	        var i = index;
+	        var i = 0;
 	        unchecked
 	        {
 		        while (count-- > 0)

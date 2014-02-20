@@ -5,9 +5,9 @@
         public float DragCoefficient = 0.47f;
         public float Density = .5f;
 
-        protected internal unsafe override void Update(float elapsedSeconds, ref Particle particle, int index, int count)
+        protected internal unsafe override void Update(float elapsedSeconds, ref Particle particle, int count)
         {
-	        var i = index;
+	        var i = 0;
 	        unchecked
 	        {
 		        while (count-- > 0)

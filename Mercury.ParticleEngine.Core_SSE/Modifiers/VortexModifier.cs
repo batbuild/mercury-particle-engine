@@ -8,7 +8,7 @@ namespace Mercury.ParticleEngine.Modifiers
 		public float Mass;
 		public float MaxSpeed;
 
-		protected internal override unsafe void Update(float elapsedSeconds, ref Particle particle, int index, int count)
+		protected internal override unsafe void Update(float elapsedSeconds, ref Particle particle, int count)
 		{
 			var distX = new float[YepppConstants.BufferLength];
 			var distY = new float[YepppConstants.BufferLength];

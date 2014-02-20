@@ -11,7 +11,7 @@ namespace Mercury.ParticleEngine.Modifiers
         public int Height;
         public float RestitutionCoefficient;
 
-        protected internal override void Update(float elapsedSeconds, ref Particle particle, int index, int count)
+        protected internal override void Update(float elapsedSeconds, ref Particle particle, int count)
         {
             var left = Width * -0.5f;
             var right = Width * 0.5f;

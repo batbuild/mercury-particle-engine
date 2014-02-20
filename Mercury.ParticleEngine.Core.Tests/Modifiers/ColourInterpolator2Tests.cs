@@ -12,7 +12,7 @@
             {
                 var particle = new Particle
                 {
-                    Age = 0.0f
+					Age = new[] { 0.0f }
                 };
 
                 var subject = new ColourInterpolator2
@@ -23,11 +23,11 @@
 
                 unsafe
                 {
-                    subject.Update(0.01666f, &particle, 1);
+                    subject.Update(0.01666f, ref particle, 1);
 
-                    particle.Colour[0].Should().BeApproximately(1f, 0.000001f);
-                    particle.Colour[1].Should().BeApproximately(0f, 0.000001f);
-                    particle.Colour[2].Should().BeApproximately(0f, 0.000001f);
+                    particle.R[0].Should().BeApproximately(1f, 0.000001f);
+                    particle.G[0].Should().BeApproximately(0f, 0.000001f);
+                    particle.B[0].Should().BeApproximately(0f, 0.000001f);
                 }
             }
 
@@ -36,7 +36,7 @@
             {
                 var particle = new Particle
                 {
-                    Age = 1.0f
+					Age = new[] { 0.0f }
                 };
 
                 var subject = new ColourInterpolator2
@@ -45,14 +45,11 @@
                     FinalColour = new Colour(0f, 0f, 1f)
                 };
 
-                unsafe
-                {
-                    subject.Update(0.01666f, &particle, 1);
+	            subject.Update(0.01666f, ref particle, 1);
 
-                    particle.Colour[0].Should().BeApproximately(0f, 0.000001f);
-                    particle.Colour[1].Should().BeApproximately(0f, 0.000001f);
-                    particle.Colour[2].Should().BeApproximately(1f, 0.000001f);
-                }
+	            particle.R[0].Should().BeApproximately(0f, 0.000001f);
+	            particle.G[0].Should().BeApproximately(0f, 0.000001f);
+	            particle.B[0].Should().BeApproximately(1f, 0.000001f);
             }
 
             [Fact]
@@ -60,7 +57,7 @@
             {
                 var particle = new Particle
                 {
-                    Age = 0.5f
+                    Age = new []{ 0.5f }
                 };
 
                 var subject = new ColourInterpolator2
@@ -71,21 +68,27 @@
 
                 unsafe
                 {
-                    subject.Update(0.01666f, &particle, 1);
+                    subject.Update(0.01666f, ref particle, 1);
 
-                    particle.Colour[0].Should().BeApproximately(0.5f, 0.000001f);
-                    particle.Colour[1].Should().BeApproximately(0f, 0.000001f);
-                    particle.Colour[2].Should().BeApproximately(0.5f, 0.000001f);
+					particle.R[0].Should().BeApproximately(0.5f, 0.000001f);
+					particle.G[0].Should().BeApproximately(0f, 0.000001f);
+					particle.B[0].Should().BeApproximately(0.5f, 0.000001f);
                 }
             }
 
             [Fact]
             public void IteratesOverEachParticle()
             {
-                var buffer = new Particle[100];
+	            var buffer = new Particle
+	            {
+					Age = new float[100],
+					R = new float[100],
+					G = new float[100],
+					B = new float[100]
+	            };
                 
-                for (int i = 0; i < buffer.Length; i++)
-                    buffer[i].Age = 1.0f;
+                for (var i = 0; i < buffer.Age.Length; i++)
+                    buffer.Age[i] = 1.0f;
 
                 var subject = new ColourInterpolator2
                 {
@@ -93,18 +96,12 @@
                     FinalColour = new Colour(0f, 0f, 1f)
                 };
 
-                unsafe
-                {
-                    fixed (Particle* particle = &buffer[0])
-                    {
-                        subject.Update(0.1666666f, particle, buffer.Length);
+	            subject.Update(0.1666666f, ref buffer, buffer.Age.Length);
 
-                        for (int i = 0; i < buffer.Length; i++)
-                        {
-                            particle[i].Colour[2].Should().BeApproximately(1f, 0.000001f);
-                        }
-                    }
-                }
+	            for (int i = 0; i < buffer.Age.Length; i++)
+	            {
+		            buffer.B[0].Should().BeApproximately(1f, 0.000001f);
+	            }
             }
         }
     }

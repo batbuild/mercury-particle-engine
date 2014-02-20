@@ -5,20 +5,21 @@
 
     internal class AssertionModifier : Modifier
     {
-        readonly Predicate<Particle> _predicate;
+        readonly Func<Particle, int, bool> _predicate;
 
-        public AssertionModifier(Predicate<Particle> predicate)
+        public AssertionModifier(Func<Particle, int, bool> predicate)
         {
             _predicate = predicate;
         }
 
-        protected internal override unsafe void Update(float elapsedSeconds, Particle* particle, int count)
+        protected internal override unsafe void Update(float elapsedSeconds, ref Particle particle, int count)
         {
+	        var i = 0;
             while (count-- > 0)
             {
-                _predicate(*particle).Should().BeTrue();
+                _predicate(particle, i).Should().BeTrue();
 
-                particle++;
+                i++;
             }
         }
     }

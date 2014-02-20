@@ -20,7 +20,7 @@
 
             if (_secondsSinceLastUpdate > (1f / Frequency))
             {
-                Modifier.Update(_secondsSinceLastUpdate, ref particle, index, count);
+                Modifier.Update(_secondsSinceLastUpdate, ref particle, count);
 
                 _secondsSinceLastUpdate = 0f;
             }

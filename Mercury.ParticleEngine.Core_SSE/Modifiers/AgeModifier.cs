@@ -12,11 +12,11 @@
 		private float _term;
 		private float _totalSeconds;
 
-		protected internal override unsafe void Update(float elapsedSeconds, ref Particle particle, int index, int count)
+		protected internal override unsafe void Update(float elapsedSeconds, ref Particle particle, int count)
 		{
 			_totalSeconds += elapsedSeconds;
 
-			var i = index;
+			var i = 0;
 			unchecked
 			{
 				while (count-- > 0)

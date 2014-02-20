@@ -1,182 +1,167 @@
 ﻿namespace Mercury.ParticleEngine
 {
-    using System;
-    using Xunit;
-    using FluentAssertions;
+	using System;
+	using Xunit;
+	using FluentAssertions;
 
-    public class ParticleBufferTests
-    {
-        public class AvailableProperty
-        {
-            [Fact]
-            public void WhenNoParticlesReleased_ReturnsBufferSize()
-            {
-                var subject = new ParticleBuffer(100);
+	public class ParticleBufferTests
+	{
+		public class AvailableProperty
+		{
+			[Fact]
+			public void WhenNoParticlesReleased_ReturnsBufferSize()
+			{
+				var subject = new ParticleBuffer(100);
 
-                subject.Available.Should().Be(100);
-            }
+				subject.Available.Should().Be(100);
+			}
 
-            [Fact]
-            public void WhenSomeParticlesReleased_ReturnsAvailableCount()
-            {
-                var subject = new ParticleBuffer(100);
+			[Fact]
+			public void WhenSomeParticlesReleased_ReturnsAvailableCount()
+			{
+				var subject = new ParticleBuffer(100);
 
-                unsafe
-                {
-                    Particle* particle;
-                    subject.Release(10, out particle);
-                }
+				int index;
+				subject.Release(10, out index);
 
-                subject.Available.Should().Be(90);
-            }
+				subject.Available.Should().Be(90);
+			}
 
-            [Fact]
-            public void WhenAllParticlesReleased_ReturnsZero()
-            {
-                var subject = new ParticleBuffer(100);
+			[Fact]
+			public void WhenAllParticlesReleased_ReturnsZero()
+			{
+				var subject = new ParticleBuffer(100);
 
-                unsafe
-                {
-                    Particle* particle;
-                    subject.Release(100, out particle);
-                }
+				int index;
+				subject.Release(100, out index);
 
-                subject.Available.Should().Be(0);
-            }
-        }
+				subject.Available.Should().Be(0);
+			}
+		}
 
-        public class CountProperty
-        {
-            [Fact]
-            public void WhenNoParticlesReleased_ReturnsZero()
-            {
-                var subject = new ParticleBuffer(100);
-                subject.Count.Should().Be(0);
-            }
+		public class CountProperty
+		{
+			[Fact]
+			public void WhenNoParticlesReleased_ReturnsZero()
+			{
+				var subject = new ParticleBuffer(100);
+				subject.Count.Should().Be(0);
+			}
 
-            [Fact]
-            public void WhenSomeParticlesReleased_ReturnsCount()
-            {
-                var subject = new ParticleBuffer(100);
-                
-                unsafe
-                {
-                    Particle* particle;
-                    subject.Release(10, out particle);
-                }
-                
-                subject.Count.Should().Be(10);
-            }
+			[Fact]
+			public void WhenSomeParticlesReleased_ReturnsCount()
+			{
+				var subject = new ParticleBuffer(100);
 
-            [Fact]
-            public void WhenAllParticlesReleased_ReturnsZero()
-            {
-                var subject = new ParticleBuffer(100);
+				unsafe
+				{
+					int index;
+					subject.Release(10, out index);
+				}
 
-                unsafe
-                {
-                    Particle* particle;
-                    subject.Release(100, out particle);
-                }
+				subject.Count.Should().Be(10);
+			}
 
-                subject.Count.Should().Be(100);
-            }
-        }
+			[Fact]
+			public void WhenAllParticlesReleased_ReturnsZero()
+			{
+				var subject = new ParticleBuffer(100);
 
-        public class ReleaseMethod
-        {
-            [Fact]
-            public void WhenPassedReasonableQuantity_ReturnsNumberReleased()
-            {
-                var subject = new ParticleBuffer(100);
+				int index;
+				subject.Release(100, out index);
 
-                unsafe
-                {
-                    Particle* particle;
-                    var count = subject.Release(50, out particle);
-                    
-                    count.Should().Be(50);
-                }
-            }
+				subject.Count.Should().Be(100);
+			}
+		}
 
-            [Fact]
-            public void WhenPassedImpossibleQuantity_ReturnsNumberActuallyReleased()
-            {
-                var subject = new ParticleBuffer(100);
+		public class ReleaseMethod
+		{
+			[Fact]
+			public void WhenPassedReasonableQuantity_ReturnsNumberReleased()
+			{
+				var subject = new ParticleBuffer(100);
 
-                unsafe
-                {
-                    Particle* particle;
-                    var count = subject.Release(200, out particle);
-                    count.Should().Be(100);
-                }
-            }
-        }
+				int index;
+				var count = subject.Release(50, out index);
 
-        public class ReclaimMethod
-        {
-            [Fact]
-            public void WhenPassedReasonableNumber_ReclaimsParticles()
-            {
-                var subject = new ParticleBuffer(100);
-                
-                unsafe
-                {
-                    Particle* particle;
-                    subject.Release(100, out particle);
-                }
+				count.Should().Be(50);
+			}
 
-                subject.Count.Should().Be(100);
+			[Fact]
+			public void WhenPassedImpossibleQuantity_ReturnsNumberActuallyReleased()
+			{
+				var subject = new ParticleBuffer(100);
 
-                subject.Reclaim(50);
+				int index;
+				var count = subject.Release(200, out index);
+				count.Should().Be(100);
+			}
+		}
 
-                subject.Count.Should().Be(50);
-            }
-        }
+		public class ReclaimMethod
+		{
+			[Fact]
+			public void WhenPassedReasonableNumber_ReclaimsParticles()
+			{
+				var subject = new ParticleBuffer(100);
 
-        public class CopyToMethod
-        {
-            [Fact]
-            public void WhenBufferIsSequential_CopiesParticlesInOrder()
-            {
-                unsafe
-                {
-                    var subject = new ParticleBuffer(10);
-                    Particle* particle;
-                    var count = subject.Release(5, out particle);
+				unsafe
+				{
+					int index;
+					subject.Release(100, out index);
+				}
 
-                    do
-                    {
-                        particle->Age = 1f;
-                        particle++;
-                    }
-                    while (count-- > 0);
+				subject.Count.Should().Be(100);
 
-                    var destination = new Particle[10];
+				subject.Reclaim(50);
 
-                    fixed (Particle* buffer = destination)
-                    {
-                        subject.CopyTo((IntPtr)buffer);
-                    }
+				subject.Count.Should().Be(50);
+			}
+		}
 
-                    destination[0].Age.Should().BeApproximately(1f, 0.0001f);
-                    destination[1].Age.Should().BeApproximately(1f, 0.0001f);
-                    destination[2].Age.Should().BeApproximately(1f, 0.0001f);
-                    destination[3].Age.Should().BeApproximately(1f, 0.0001f);
-                    destination[4].Age.Should().BeApproximately(1f, 0.0001f);
-                }
-            }
-        }
+		public class CopyToMethod
+		{
+			[Fact]
+			public void WhenBufferIsSequential_CopiesParticlesInOrder()
+			{
+				unsafe
+				{
+					var subject = new ParticleBuffer(10);
+					int index;
+					var count = subject.Release(5, out index);
 
-        public class DisposeMethod
-        {
-            [Fact]
-            public void IsIdempotent()
-            {
-                var subject = new ParticleBuffer(100);
-                subject.Dispose();
-                subject.Dispose();
-            }
-        }
-    }
+					do
+					{
+						subject.Particles.Age[index] = 1f;
+						index++;
+					}
+					while (count-- > 0);
+
+					var destination = new float[10];
+
+					fixed (float* buffer = destination)
+					{
+						subject.CopyTo((IntPtr)buffer);
+					}
+
+					destination[0].Should().BeApproximately(1f, 0.0001f);
+					destination[1].Should().BeApproximately(1f, 0.0001f);
+					destination[2].Should().BeApproximately(1f, 0.0001f);
+					destination[3].Should().BeApproximately(1f, 0.0001f);
+					destination[4].Should().BeApproximately(1f, 0.0001f);
+				}
+			}
+		}
+
+		public class DisposeMethod
+		{
+			[Fact]
+			public void IsIdempotent()
+			{
+				var subject = new ParticleBuffer(100);
+				subject.Dispose();
+				subject.Dispose();
+			}
+		}
+	}
 }

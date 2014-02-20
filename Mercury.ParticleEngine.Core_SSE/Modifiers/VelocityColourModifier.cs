@@ -8,11 +8,11 @@
         public Colour VelocityColour;
         public float VelocityThreshold;
 
-        protected internal override unsafe void Update(float elapsedSeconds, ref Particle particle, int index, int count)
+        protected internal override unsafe void Update(float elapsedSeconds, ref Particle particle, int count)
         {
             var velocityThreshold2 = VelocityThreshold * VelocityThreshold;
 
-	        var i = index;
+	        var i = 0;
 	        unchecked
 	        {
 		        while (count-- > 0)

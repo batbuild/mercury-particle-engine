@@ -15,13 +15,13 @@
         /// </summary>
         public Colour FinalColour;
 
-        protected internal override unsafe void Update(float elapsedseconds, ref Particle particle, int index, int count)
+        protected internal override unsafe void Update(float elapsedseconds, ref Particle particle, int count)
         {
             var delta = new Colour(FinalColour.H - InitialColour.H,
                                    FinalColour.S - InitialColour.S,
                                    FinalColour.L - InitialColour.L);
 
-	        var i = index;
+	        var i = 0;
 	        unchecked
 	        {
 		        while (count-- > 0)

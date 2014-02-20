@@ -10,7 +10,7 @@ namespace Mercury.ParticleEngine.Modifiers
 		public float VelocityHue;
 		public float VelocityThreshold;
 
-		protected internal override unsafe void Update(float elapsedSeconds, ref Particle particle, int index, int count)
+		protected internal override unsafe void Update(float elapsedSeconds, ref Particle particle, int count)
 		{
 			var velocityThreshold2 = VelocityThreshold * VelocityThreshold;
 
