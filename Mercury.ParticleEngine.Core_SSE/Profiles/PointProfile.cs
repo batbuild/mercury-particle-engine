@@ -2,11 +2,16 @@
 {
     public class PointProfile : Profile
     {
-        public override unsafe void GetOffsetAndHeading(Coordinate* offset, Axis* heading)
+        public override void GetOffsetAndHeading(ref Particle particles, int index)
         {
-            *offset = Coordinate.Origin;
+	        particles.X[index] = 0;
+	        particles.Y[index] = 0;
 
-            FastRand.NextUnitVector((Vector*)heading);
+			var vx = 0f;
+			var vy = 0f;
+			FastRand.NextUnitVector(ref vx, ref vy);
+			particles.VX[index] = vx;
+			particles.VY[index] = vy;
         }
     }
 }

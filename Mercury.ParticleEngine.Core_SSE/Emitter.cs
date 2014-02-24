@@ -39,7 +39,7 @@
 
         private void ReclaimExpiredParticles()
         {
-	        var index = Buffer.Index;
+	        var i = 0;
 	        var particle = Buffer.Particles;
             var count = Buffer.Count;
 
@@ -47,11 +47,11 @@
             
             while (count-- > 0)
             {
-                if ((_totalSeconds - particle.Inception[index]) < _term)
+                if ((_totalSeconds - particle.Inception[i]) < _term)
                     break;
                 
                 expired++;
-                index++;
+                i++;
             }
 
             Buffer.Reclaim(expired);
@@ -85,15 +85,13 @@
         {
             var numToRelease = FastRand.NextInteger(Parameters.Quantity);
 
-            int i;
-            var count = Buffer.Release(numToRelease, out i);
+            var count = Buffer.Release(numToRelease);
+			var i = Buffer.Index;
 	        var particle = Buffer.Particles;
 
             while (count-- > 0)
             {
-	            var coordinate = new Coordinate(particle.X[i], particle.Y[i]);
-				var axis = new Axis(particle.VX[i], particle.VY[i]);
-				Profile.GetOffsetAndHeading(&coordinate, &axis);
+				Profile.GetOffsetAndHeading(ref particle, i);
 
                 particle.Age[i] = 0f;
                 particle.Inception[i] = _totalSeconds;

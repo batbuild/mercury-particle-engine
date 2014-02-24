@@ -61,6 +61,7 @@
     <Compile Include="Modifiers\ColourInterpolator2Tests.cs" />
     <Compile Include="ParticleBufferTests.cs" />
     <Compile Include="Profiles\PointProfileTests.cs" />
+    <Compile Include="Profiles\ProfilesTestHelper.cs" />
     <Compile Include="Profiles\RingProfileTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

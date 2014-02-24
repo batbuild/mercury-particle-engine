@@ -5,12 +5,16 @@
         public float Width;
         public float Height;
 
-        public override unsafe void GetOffsetAndHeading(Coordinate* offset, Axis* heading)
+        public override void GetOffsetAndHeading(ref Particle particles, int index)
         {
-            *offset = new Coordinate(FastRand.NextSingle(Width * -0.5f, Width * 0.5f),
-                                     FastRand.NextSingle(Height * -0.5f, Height * 0.5f));
+			particles.X[index] = FastRand.NextSingle(Width * -0.5f, Width * 0.5f);
+			particles.Y[index] = FastRand.NextSingle(Height * -0.5f, Height * 0.5f);
 
-            FastRand.NextUnitVector((Vector*)heading);
+	        var vx = 0f;
+			var vy = 0f;
+            FastRand.NextUnitVector(ref vx, ref vy);
+	        particles.VX[index] = vx;
+	        particles.VY[index] = vy;
         }
     }
 }

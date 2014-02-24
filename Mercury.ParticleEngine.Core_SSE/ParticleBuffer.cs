@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 
 namespace Mercury.ParticleEngine
 {
-	internal unsafe class ParticleBuffer : IDisposable
+	public unsafe class ParticleBuffer : IDisposable
 	{
 		private int _tail;
 		private bool _disposed;
@@ -49,7 +49,7 @@ namespace Mercury.ParticleEngine
 			get { return Particle.SizeInBytes * Size; }
 		}
 
-		public int Release(int releaseQuantity, out int Index)
+		public int Release(int releaseQuantity)
 		{
 			var numToRelease = Math.Min(releaseQuantity, Available);
 
@@ -65,6 +65,7 @@ namespace Mercury.ParticleEngine
 		public void Reclaim(int number)
 		{
 			_tail -= number;
+			Index -= number;
 
 			Reclaim(number, Particles.X);
 			Reclaim(number, Particles.Y);
@@ -83,8 +84,7 @@ namespace Mercury.ParticleEngine
 
 		private void Reclaim(int number, float[] array)
 		{
-			Array.Copy(array, number, array, 0, number);
-			Array.Clear(array, _tail, number);
+			Array.Copy(array, number, array, 0, _tail);
 		}
 
 		public void CopyTo(IntPtr destination)

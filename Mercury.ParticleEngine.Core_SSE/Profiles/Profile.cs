@@ -2,7 +2,7 @@
 {
     public abstract class Profile
     {
-        public abstract unsafe void GetOffsetAndHeading(Coordinate* offset, Axis* heading);
+        public abstract unsafe void GetOffsetAndHeading(ref Particle particles, int index);
 
         static public Profile Point()
         {

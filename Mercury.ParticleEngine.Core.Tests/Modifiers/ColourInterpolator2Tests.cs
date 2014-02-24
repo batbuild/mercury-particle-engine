@@ -12,7 +12,10 @@
             {
                 var particle = new Particle
                 {
-					Age = new[] { 0.0f }
+					Age = new[] { 0.0f },
+					R = new float[1],
+					G = new float[1],
+					B = new float[1]
                 };
 
                 var subject = new ColourInterpolator2
@@ -36,7 +39,10 @@
             {
                 var particle = new Particle
                 {
-					Age = new[] { 0.0f }
+					Age = new []{1f},
+					R = new float[1],
+					G = new float[1],
+					B = new float[1]
                 };
 
                 var subject = new ColourInterpolator2
@@ -57,7 +63,10 @@
             {
                 var particle = new Particle
                 {
-                    Age = new []{ 0.5f }
+                    Age = new []{ 0.5f },
+					R = new float[1],
+					G = new float[1],
+					B = new float[1]
                 };
 
                 var subject = new ColourInterpolator2

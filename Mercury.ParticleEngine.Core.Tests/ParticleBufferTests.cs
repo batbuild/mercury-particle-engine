@@ -22,7 +22,7 @@
 				var subject = new ParticleBuffer(100);
 
 				int index;
-				subject.Release(10, out index);
+				subject.Release(10);
 
 				subject.Available.Should().Be(90);
 			}
@@ -33,7 +33,7 @@
 				var subject = new ParticleBuffer(100);
 
 				int index;
-				subject.Release(100, out index);
+				subject.Release(100);
 
 				subject.Available.Should().Be(0);
 			}
@@ -56,7 +56,7 @@
 				unsafe
 				{
 					int index;
-					subject.Release(10, out index);
+					subject.Release(10);
 				}
 
 				subject.Count.Should().Be(10);
@@ -68,7 +68,7 @@
 				var subject = new ParticleBuffer(100);
 
 				int index;
-				subject.Release(100, out index);
+				subject.Release(100);
 
 				subject.Count.Should().Be(100);
 			}
@@ -82,7 +82,7 @@
 				var subject = new ParticleBuffer(100);
 
 				int index;
-				var count = subject.Release(50, out index);
+				var count = subject.Release(50);
 
 				count.Should().Be(50);
 			}
@@ -93,7 +93,7 @@
 				var subject = new ParticleBuffer(100);
 
 				int index;
-				var count = subject.Release(200, out index);
+				var count = subject.Release(200);
 				count.Should().Be(100);
 			}
 		}
@@ -108,7 +108,7 @@
 				unsafe
 				{
 					int index;
-					subject.Release(100, out index);
+					subject.Release(100);
 				}
 
 				subject.Count.Should().Be(100);
@@ -127,8 +127,8 @@
 				unsafe
 				{
 					var subject = new ParticleBuffer(10);
-					int index;
-					var count = subject.Release(5, out index);
+					var count = subject.Release(5);
+					var index = subject.Index;
 
 					do
 					{

@@ -115,6 +115,14 @@
             *vector = new Vector((float)Math.Cos(angle), (float)Math.Sin(angle));
         }
 
+		static public void NextUnitVector(ref float x, ref float y)
+		{
+			var angle = NextAngle();
+
+			x = (float) Math.Cos(angle);
+			y = (float) Math.Sin(angle);
+		}
+
         static public unsafe void NextColour(Colour* colour, ColourRange range)
         {
             *colour = new Colour(NextSingle(range.Min.H, range.Max.H),
