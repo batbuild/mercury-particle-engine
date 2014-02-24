@@ -20,7 +20,7 @@
         private readonly float _term;
         private float _totalSeconds;
 
-        internal ParticleBuffer Buffer { get; private set; }
+        public ParticleBuffer Buffer { get; private set; }
 
         public int ActiveParticles
         {
