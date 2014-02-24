@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Mercury.ParticleEngine</RootNamespace>
-    <AssemblyName>Mercury.ParticleEngine.Core</AssemblyName>
+    <AssemblyName>Mercury.ParticleEngine</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
