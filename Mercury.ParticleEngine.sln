@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mercury.ParticleEngine.Shar
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mercury.ParticleEngine.SharpDX.Direct3D9.Sample", "Mercury.ParticleEngine.SharpDX.Direct3D9.Sample\Mercury.ParticleEngine.SharpDX.Direct3D9.Sample.csproj", "{A80CE58A-40BF-4766-89D2-3E81C5D9BC63}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mercury.ParticleEngine.Core", "Mercury.ParticleEngine.Core_SSE\Mercury.ParticleEngine.Core.csproj", "{499A6328-05AF-45CD-BD51-16813F1D495D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mercury.ParticleEngine", "Mercury.ParticleEngine.Core_SSE\Mercury.ParticleEngine.csproj", "{499A6328-05AF-45CD-BD51-16813F1D495D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

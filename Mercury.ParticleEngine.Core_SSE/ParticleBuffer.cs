@@ -65,7 +65,6 @@ namespace Mercury.ParticleEngine
 		public void Reclaim(int number)
 		{
 			_tail -= number;
-			Index -= number;
 
 			Reclaim(number, Particles.X);
 			Reclaim(number, Particles.Y);
@@ -89,7 +88,7 @@ namespace Mercury.ParticleEngine
 
 		public void CopyTo(IntPtr destination)
 		{
-			var rowSize = _tail * sizeof(float);
+			var rowSize = Size * sizeof(float);
 
 			fixed (float* data = Particles.Age)
 				memcpy(destination, (IntPtr)data, rowSize);
