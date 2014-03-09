@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{E7B59AF1-5CCF-472B-906A-62BF48E520A8}</ProjectGuid>
+    <ProjectGuid>{E9B007E5-A803-46A3-AEF5-05DE0B56A5AF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Mercury.ParticleEngine</RootNamespace>
-    <AssemblyName>Mercury.ParticleEngine.Core</AssemblyName>
+    <AssemblyName>Mercury.ParticleEngine.Core.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -21,8 +21,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Prefer32Bit>false</Prefer32Bit>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -32,53 +32,50 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Prefer32Bit>false</Prefer32Bit>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FluentAssertions, Version=2.1.0.0, Culture=neutral, PublicKeyToken=33f2691a05b67b6a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\.lib\FluentAssertions.2.1.0.0\lib\net45\FluentAssertions.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="yeppp-clr">
-      <HintPath>C:\Program Files (x86)\Yeppp! SDK\binaries\clr-2.0\yeppp-clr.dll</HintPath>
+    <Reference Include="System.XML" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="xunit, Version=1.9.2.1705, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\.lib\xunit.1.9.2\lib\net20\xunit.dll</HintPath>
+    </Reference>
+    <Reference Include="xunit.extensions, Version=1.9.2.1705, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\.lib\xunit.extensions.1.9.2\lib\net20\xunit.extensions.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Axis.cs" />
-    <Compile Include="BlendMode.cs" />
-    <Compile Include="Colour.cs" />
-    <Compile Include="ColourRange.cs" />
-    <Compile Include="Coordinate.cs" />
-    <Compile Include="Emitter.cs" />
-    <Compile Include="Modifiers\ModifierCollection.cs" />
-    <Compile Include="ModifierExecutionStrategy.cs" />
-    <Compile Include="Modifiers\ModifierSlot.cs" />
-    <Compile Include="Modifiers\AgeModifier.cs" />
-    <Compile Include="Modifiers\ColourInterpolator2.cs" />
-    <Compile Include="Modifiers\ContainerModifier.cs" />
-    <Compile Include="Modifiers\DragModifier.cs" />
-    <Compile Include="Modifiers\HueInterpolator2.cs" />
-    <Compile Include="Modifiers\LinearGravityModifier.cs" />
-    <Compile Include="Modifiers\MoveModifier.cs" />
-    <Compile Include="Modifiers\OpacityFastFadeModifier.cs" />
-    <Compile Include="Modifiers\VelocityHueModifier.cs" />
-    <Compile Include="Modifiers\VortexModifier.cs" />
-    <Compile Include="Modifiers\VelocityColourModifier.cs" />
-    <Compile Include="Profiles\BoxProfile.cs" />
-    <Compile Include="Profiles\CircleProfile.cs" />
-    <Compile Include="Profiles\PointProfile.cs" />
-    <Compile Include="Profiles\Profile.cs" />
-    <Compile Include="Modifiers\Modifier.cs" />
-    <Compile Include="Particle.cs" />
-    <Compile Include="Profiles\BoxFillProfile.cs" />
-    <Compile Include="Profiles\RingProfile.cs" />
+    <Compile Include="AssertionModifier.cs" />
+    <Compile Include="ColourTests.cs" />
+    <Compile Include="EmitterTests.cs" />
+    <Compile Include="Modifiers\ColourInterpolator2Tests.cs" />
+    <Compile Include="ParticleBufferTests.cs" />
+    <Compile Include="Profiles\PointProfileTests.cs" />
+    <Compile Include="Profiles\ProfilesTestHelper.cs" />
+    <Compile Include="Profiles\RingProfileTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ParticleBuffer.cs" />
-    <Compile Include="FastRand.cs" />
-    <Compile Include="Range.cs" />
-    <Compile Include="RangeF.cs" />
-    <Compile Include="ReleaseParameters.cs" />
-    <Compile Include="Vector.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Mercury.ParticleEngine\Mercury.ParticleEngine.csproj">
+      <Project>{499a6328-05af-45cd-bd51-16813f1d495d}</Project>
+      <Name>Mercury.ParticleEngine</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildProjectDirectory)\..\.build\nuget.targets" />

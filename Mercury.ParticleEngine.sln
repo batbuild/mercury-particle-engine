@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mercury.ParticleEngine.Core.Tests", "Mercury.ParticleEngine.Core.Tests\Mercury.ParticleEngine.Core.Tests.csproj", "{E9B007E5-A803-46A3-AEF5-05DE0B56A5AF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mercury.ParticleEngine.Core.Tests", "Mercury.ParticleEngine.Tests\Mercury.ParticleEngine.Tests.csproj", "{E9B007E5-A803-46A3-AEF5-05DE0B56A5AF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mercury.ParticleEngine.SharpDX.Direct3D9", "Mercury.ParticleEngine.SharpDX.Direct3D9\Mercury.ParticleEngine.SharpDX.Direct3D9.csproj", "{ACA557D3-43A9-424F-A35A-4FB9C93FE4E3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mercury.ParticleEngine.SharpDX.Direct3D9.Sample", "Mercury.ParticleEngine.SharpDX.Direct3D9.Sample\Mercury.ParticleEngine.SharpDX.Direct3D9.Sample.csproj", "{A80CE58A-40BF-4766-89D2-3E81C5D9BC63}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mercury.ParticleEngine", "Mercury.ParticleEngine.Core_SSE\Mercury.ParticleEngine.csproj", "{499A6328-05AF-45CD-BD51-16813F1D495D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mercury.ParticleEngine", "Mercury.ParticleEngine\Mercury.ParticleEngine.csproj", "{499A6328-05AF-45CD-BD51-16813F1D495D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

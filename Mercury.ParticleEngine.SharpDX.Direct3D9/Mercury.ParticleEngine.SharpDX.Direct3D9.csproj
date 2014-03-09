@@ -66,9 +66,9 @@
     <None Include="Resources\PointSprite.fx" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Mercury.ParticleEngine.Core_SSE\Mercury.ParticleEngine.Core.csproj">
+    <ProjectReference Include="..\Mercury.ParticleEngine\Mercury.ParticleEngine.csproj">
       <Project>{499a6328-05af-45cd-bd51-16813f1d495d}</Project>
-      <Name>Mercury.ParticleEngine.Core</Name>
+      <Name>Mercury.ParticleEngine</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
