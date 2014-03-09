@@ -9,7 +9,11 @@
 	        {
 		        while (count-- > 0)
 		        {
-			        particle.Opacity[i] = 1.0f - particle.Age[i];
+			        var alpha = 1.0f - particle.Age[i];
+			        particle.Opacity[i] = alpha;
+			        particle.R[i] *= alpha;
+			        particle.G[i] *= alpha;
+			        particle.B[i] *= alpha;
 
 			        i++;
 		        }

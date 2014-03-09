@@ -4,7 +4,7 @@
     using System.Runtime.InteropServices;
 
     /// <summary>
-    /// An immutable data structure representing a 24bit colour composed of separate red, green and blue channels.
+    /// An immutable data structure representing a 32bit colour composed of separate red, green, blue and alpha channels.
     /// </summary>
     [Serializable]
     [StructLayout(LayoutKind.Sequential)]
@@ -25,6 +25,11 @@
         /// </summary>
         public readonly float L;
 
+		/// <summary>
+		/// Gets the value of the alpha channel.
+		/// </summary>
+		public readonly float A;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Colour"/> struct.
         /// </summary>
@@ -32,11 +37,24 @@
         /// <param name="s">The value of the saturation channel.</param>
         /// <param name="l">The value of the lightness channel.</param>
         public Colour(float h, float s, float l)
+			: this(h, s, l, 1)
         {
-            H = h;
-            S = s;
-            L = l;
         }
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="Colour"/> struct.
+		/// </summary>
+		/// <param name="h">The value of the hue channel.</param>
+		/// <param name="s">The value of the saturation channel.</param>
+		/// <param name="l">The value of the lightness channel.</param>
+		/// <param name="a">The value of the alpha channel.</param>
+		public Colour(float h, float s, float l, float a)
+		{
+			H = h;
+			S = s;
+			L = l;
+			A = a;
+		}
 
         /// <summary>
         /// Determines whether the specified <see cref="System.Object"/> is equal to this instance.
@@ -64,7 +82,8 @@
         {
             return H.Equals(value.H) &&
                    S.Equals(value.S) &&
-                   L.Equals(value.L);
+                   L.Equals(value.L) &&
+				   A.Equals(value.A);
         }
 
         /// <summary>
@@ -77,7 +96,8 @@
         {
             return H.GetHashCode() ^
                    S.GetHashCode() ^
-                   L.GetHashCode();
+                   L.GetHashCode() ^
+				   A.GetHashCode();
         }
 
         /// <summary>
@@ -88,7 +108,7 @@
         /// </returns>
         public override string ToString()
         {
-            return String.Format("{0}°,{1:P0},{2:P0}", H, S, L);
+            return String.Format("{0}°,{1:P0},{2:P0}, {3}", H, S, L, A);
         }
 
         /// <summary>
