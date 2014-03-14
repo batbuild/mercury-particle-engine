@@ -26,11 +26,9 @@
 	        {
 		        while (count-- > 0)
 		        {
-			        var alpha = 1 - particle.Age[i];
-			        particle.R[i] = (InitialColour.H + (delta.H * particle.Age[i])) * alpha;
-					particle.G[i] = (InitialColour.S + (delta.S * particle.Age[i])) * alpha;
-					particle.B[i] = (InitialColour.L + (delta.L * particle.Age[i])) * alpha;
-
+			        particle.R[i] = InitialColour.H + (delta.H * particle.Age[i]);
+					particle.G[i] = InitialColour.S + (delta.S * particle.Age[i]);
+					particle.B[i] = InitialColour.L + (delta.L * particle.Age[i]);
 			        i++;
 		        }
 	        }
