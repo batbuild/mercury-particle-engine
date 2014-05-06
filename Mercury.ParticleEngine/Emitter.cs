@@ -104,16 +104,16 @@
                 particle.VX[i] *= speed;
                 particle.VY[i] *= speed;
 
-	            var r = particle.R[i];
-	            var g = particle.G[i];
-	            var b = particle.B[i];
+	            float r = 0;
+	            float g = 0;
+	            float b = 0;
 	            FastRand.NextColour(ref r, ref g, ref b, Parameters.Colour);
 
 	            particle.R[i] = r;
 	            particle.G[i] = g;
 	            particle.B[i] = b;
                 
-                particle.Opacity[i]	= FastRand.NextSingle(Parameters.Opacity);
+                particle.Opacity[i]		= FastRand.NextSingle(Parameters.Opacity);
 				particle.Scale[i]		= FastRand.NextSingle(Parameters.Scale);
 				particle.Rotation[i]	= FastRand.NextSingle(Parameters.Rotation);
 				particle.Mass[i]		= FastRand.NextSingle(Parameters.Mass);
