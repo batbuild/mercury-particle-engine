@@ -116,6 +116,12 @@ namespace Mercury.ParticleEngine
 
 			fixed (float* data = Particles.Rotation)
 				memcpy(IntPtr.Add(destination, rowSize * 8), (IntPtr)data, rowSize);
+
+			fixed (float* data = Particles.VX)
+				memcpy(IntPtr.Add(destination, rowSize * 9), (IntPtr)data, rowSize);
+
+			fixed (float* data = Particles.VY)
+				memcpy(IntPtr.Add(destination, rowSize * 10), (IntPtr)data, rowSize);
 		}
 
 		[DllImport("msvcrt.dll", EntryPoint = "memcpy", CallingConvention = CallingConvention.Cdecl, SetLastError = false)]

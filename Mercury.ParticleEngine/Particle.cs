@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
 
 namespace Mercury.ParticleEngine
 {
-	// Note: Remember to try shoving the individual arrays into streams and use instancing. That way you won't have to
-	// convert from the SOA version to a AOS version in order to render.
 	[StructLayout(LayoutKind.Sequential)]
 	public struct Particle
 	{
@@ -23,6 +19,6 @@ namespace Mercury.ParticleEngine
 		public float[] Rotation;
 		public float[] Mass;
 
-		static public readonly int SizeInBytes = 36;
+		static public readonly int SizeInBytes = 44;
 	}
 }
