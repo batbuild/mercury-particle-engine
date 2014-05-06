@@ -51,6 +51,7 @@
     <Compile Include="Coordinate.cs" />
     <Compile Include="Emitter.cs" />
     <Compile Include="Modifiers\Approximate.cs" />
+    <Compile Include="Modifiers\RotateToFaceDirectionModifier.cs" />
     <Compile Include="Modifiers\ScaleModifier.cs" />
     <Compile Include="Modifiers\YepppConstants.cs" />
     <Compile Include="Modifiers\ModifierCollection.cs" />
