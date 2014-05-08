@@ -1,53 +1,46 @@
-﻿using Yeppp;
-
-namespace Mercury.ParticleEngine.Modifiers
+﻿namespace Mercury.ParticleEngine.Modifiers
 {
-    using System;
+	public sealed unsafe class ContainerModifier : Modifier
+	{
+		public Coordinate Position;
+		public int Width;
+		public int Height;
+		public float RestitutionCoefficient;
 
-    public sealed unsafe class ContainerModifier : Modifier
-    {
-        public Coordinate Position;
-        public int Width;
-        public int Height;
-        public float RestitutionCoefficient;
+		protected internal override void Update(float elapsedSeconds, ref Particle particle, int count)
+		{
+			var left = Position._x + Width * -0.5f;
+			var right = Position._x + Width * 0.5f;
+			var top = Position._y + Height * -0.5f;
+			var bottom = Position._y + Height * 0.5f;
 
-        protected internal override void Update(float elapsedSeconds, ref Particle particle, int count)
-        {
-            var left = Width * -0.5f;
-            var right = Width * 0.5f;
-            var top = Height * -0.5f;
-            var bottom = Height * 0.5f;
+			unchecked
+			{
+				while (count-- > 0)
+				{
+					if ((int)particle.X[count] < left)
+					{
+						particle.X[count] = left + (left - particle.X[count]);
+						particle.VX[count] = -particle.VX[count] * RestitutionCoefficient;
+					}
+					else if ((int)particle.X[count] > right)
+					{
+						particle.X[count] = right - (particle.X[count] - right);
+						particle.VX[count] = -particle.VX[count] * RestitutionCoefficient;
+					}
 
-	        var i = 0;
-	        unchecked
-	        {
-		        while (count-- > 0)
-		        {
-			        if ((int)particle.X[i] < left)
-			        {
-				        particle.X[i] = left + (left - particle.X[i]);
-				        particle.VX[i] = -particle.VX[i] * RestitutionCoefficient;
-			        }
-			        else if ((int)particle.X[i] > right)
-			        {
-				        particle.X[i] = right - (particle.X[i] - right);
-				        particle.VX[i] = -particle.VX[i] * RestitutionCoefficient;
-			        }
-
-			        if ((int)particle.Y[i] < top)
-			        {
-				        particle.Y[i] = top + (top - particle.Y[i]);
-				        particle.VY[i] = -particle.VY[i] * RestitutionCoefficient;
-			        }
-			        else if ((int)particle.Y[i] > bottom)
-			        {
-				        particle.Y[i] = bottom - (particle.Y[i] - bottom);
-				        particle.VY[i] = -particle.VY[i] * RestitutionCoefficient;
-			        }
-
-			        i++;
-		        }
-	        }
-        }
-    }
+					if ((int)particle.Y[count] < top)
+					{
+						particle.Y[count] = top + (top - particle.Y[count]);
+						particle.VY[count] = -particle.VY[count] * RestitutionCoefficient;
+					}
+					else if ((int)particle.Y[count] > bottom)
+					{
+						particle.Y[count] = bottom - (particle.Y[count] - bottom);
+						particle.VY[count] = -particle.VY[count] * RestitutionCoefficient;
+					}
+				}
+			}
+		}
+	}
 }
