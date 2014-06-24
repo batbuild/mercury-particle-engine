@@ -122,6 +122,62 @@
             }
         }
 
+		/// <summary>
+		/// Use this overload of Trigger when you want the emitter to interpolate the emission position between two points.
+		/// Useful for fast moving emitters where the particles would otherwise be emitted in clumps.
+		/// Note that the horrible duplication of code between the overloads of Trigger is because this is performance
+		/// critical code, and I don't want to introduce even extra method calls if it can be avoided.
+		/// </summary>
+		/// <param name="startPosition"></param>
+		/// <param name="endPosition"></param>
+	    public void Trigger(Coordinate startPosition, Coordinate endPosition)
+	    {
+			var numToRelease = FastRand.NextInteger(Parameters.Quantity);
+
+			var count = Buffer.Release(numToRelease);
+			var i = Buffer.Index;
+			var particle = Buffer.Particles;
+		    var t = 0f;
+		    var totalToRelease = count;
+		    var released = 0f;
+
+			while (count-- > 0)
+			{
+				var positionX = startPosition._x + (endPosition._x - startPosition._x) * t;
+				var positionY = startPosition._y + (endPosition._y - startPosition._y) * t;
+
+				Profile.GetOffsetAndHeading(ref particle, i);
+
+				particle.Age[i] = 0f;
+				particle.Inception[i] = _totalSeconds;
+
+				particle.X[i] += positionX;
+				particle.Y[i] += positionY;
+
+				var speed = FastRand.NextSingle(Parameters.Speed);
+
+				particle.VX[i] *= speed;
+				particle.VY[i] *= speed;
+
+				float r = 0;
+				float g = 0;
+				float b = 0;
+				FastRand.NextColour(ref r, ref g, ref b, Parameters.Colour);
+
+				particle.R[i] = r;
+				particle.G[i] = g;
+				particle.B[i] = b;
+
+				particle.Opacity[i] = FastRand.NextSingle(Parameters.Opacity);
+				particle.Scale[i] = FastRand.NextSingle(Parameters.Scale);
+				particle.Rotation[i] = FastRand.NextSingle(Parameters.Rotation);
+				particle.Mass[i] = FastRand.NextSingle(Parameters.Mass);
+
+				i++;
+				t = ++released / totalToRelease;
+			}
+	    }
+
         public void Dispose()
         {
             Buffer.Dispose();
