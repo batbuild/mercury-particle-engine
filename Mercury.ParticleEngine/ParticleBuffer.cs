@@ -88,7 +88,7 @@ namespace Mercury.ParticleEngine
 
 		public void CopyTo(IntPtr destination)
 		{
-			var rowSize = Size * sizeof(float);
+			var rowSize = Count * sizeof(float);
 
 			fixed (float* data = Particles.Age)
 				memcpy(destination, (IntPtr)data, rowSize);
