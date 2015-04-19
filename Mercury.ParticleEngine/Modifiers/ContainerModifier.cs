@@ -14,30 +14,44 @@
 			var top = Position._y + Height * -0.5f;
 			var bottom = Position._y + Height * 0.5f;
 
-			unchecked
+			fixed (float* xPtr = particle.X)
+			fixed (float* yPtr = particle.Y)
+			fixed (float* vxPtr = particle.VX)
+			fixed (float* vyPtr = particle.VY)
 			{
-				while (count-- > 0)
+				var xDataPtr = xPtr;
+				var yDataPtr = yPtr;
+				var vxDataPtr = vxPtr;
+				var vyDataPtr = vyPtr;
+
+				for (var j = 0; j < count; j++)
 				{
-					if ((int)particle.X[count] < left)
+					var x = *(xDataPtr + j);
+					var vx = *(vxDataPtr + j);
+
+					if ((int)x < left)
 					{
-						particle.X[count] = left + (left - particle.X[count]);
-						particle.VX[count] = -particle.VX[count] * RestitutionCoefficient;
+						*(xDataPtr + j) = left + (left - x);
+						*(vxDataPtr + j) = -vx * RestitutionCoefficient;
 					}
-					else if ((int)particle.X[count] > right)
+					else if ((int)x > right)
 					{
-						particle.X[count] = right - (particle.X[count] - right);
-						particle.VX[count] = -particle.VX[count] * RestitutionCoefficient;
+						*(xDataPtr + j) = right - (x - right);
+						*(vxDataPtr + j) = -vx * RestitutionCoefficient;
 					}
 
-					if ((int)particle.Y[count] < top)
+					var y = *(yDataPtr + j);
+					var vy = *(vyDataPtr + j);
+
+					if ((int)y < top)
 					{
-						particle.Y[count] = top + (top - particle.Y[count]);
-						particle.VY[count] = -particle.VY[count] * RestitutionCoefficient;
+						*(yDataPtr + j) = top + (top - y);
+						*(vyDataPtr + j) = -vy * RestitutionCoefficient;
 					}
-					else if ((int)particle.Y[count] > bottom)
+					else if ((int)y > bottom)
 					{
-						particle.Y[count] = bottom - (particle.Y[count] - bottom);
-						particle.VY[count] = -particle.VY[count] * RestitutionCoefficient;
+						*(yDataPtr + j) = bottom - (y - bottom);
+						*(vyDataPtr + j) = -vy * RestitutionCoefficient;
 					}
 				}
 			}

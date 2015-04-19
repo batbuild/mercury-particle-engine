@@ -1,4 +1,6 @@
-﻿namespace Mercury.ParticleEngine.Modifiers
+﻿using System.Diagnostics;
+
+namespace Mercury.ParticleEngine.Modifiers
 {
 	using System;
 
@@ -15,18 +17,28 @@
 		protected internal override unsafe void Update(float elapsedSeconds, ref Particle particle, int count)
 		{
 			_totalSeconds += elapsedSeconds;
-
-			var i = 0;
-			unchecked
+			
+			fixed (float* agePtr = particle.Age)
+			fixed (float* inceptionPtr = particle.Inception)
 			{
-				while (count-- > 0)
+				var ageDataPtr = agePtr;
+				var inceptionDataPtr = inceptionPtr;
+				var term = _term;
+				var totalSeconds = _totalSeconds;
+
+				for (var j = 0; j < count; j++)
 				{
+					var age = (totalSeconds - *(inceptionDataPtr + j)) / term;
+
 					// TODO: There is a fairly systemic bug in the emitter code right now that means that the inception time
 					// of a particle can be later than the total elapsed time in here. It happens because the modifiers are 
 					// not necessarily updated every frame, while the emitter is.
-					particle.Age[i] = Math.Min(1, Math.Max(0, (_totalSeconds - particle.Inception[i]) / _term));
+					if (age < 0)
+						age = 0;
+					if (age > 1)
+						age = 1;
 
-					i++;
+					*(ageDataPtr + j) = age;
 				}
 			}
 		}

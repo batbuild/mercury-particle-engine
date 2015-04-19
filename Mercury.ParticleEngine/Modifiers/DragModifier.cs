@@ -7,19 +7,22 @@
 
         protected internal unsafe override void Update(float elapsedSeconds, ref Particle particle, int count)
         {
-	        var i = 0;
-	        unchecked
-	        {
-		        while (count-- > 0)
-		        {
-			        var drag = -DragCoefficient * Density * particle.Mass[i] * elapsedSeconds;
+			fixed (float* massPtr = particle.Mass)
+			fixed (float* vxPtr = particle.VX)
+			fixed (float* vyPtr = particle.VY)
+			{
+				var mass = massPtr;
+				var vxDataPtr = vxPtr;
+				var vyDataPtr = vyPtr;
 
-			        particle.VX[i] += (particle.VX[i] * drag);
-			        particle.VY[i] += (particle.VY[i] * drag);
+				for (var j = 0; j < count; j++)
+				{
+					var drag = -DragCoefficient * Density * *(mass + j) * elapsedSeconds;
 
-			        i++;
-		        }
-	        }
+					*(vxDataPtr + j) += (*(vxDataPtr + j) * drag);
+					*(vyDataPtr + j) += (*(vyDataPtr + j) * drag);
+				}
+			}
         }
     }
 }

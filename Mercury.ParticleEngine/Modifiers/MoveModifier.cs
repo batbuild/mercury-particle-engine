@@ -1,20 +1,23 @@
-﻿using System;
-
-namespace Mercury.ParticleEngine.Modifiers
+﻿namespace Mercury.ParticleEngine.Modifiers
 {
 	public class MoveModifier : Modifier
 	{
 		protected internal override unsafe void Update(float elapsedSeconds, ref Particle particle, int count)
 		{
-			unchecked
+			fixed (float* xPtr = particle.X)
+			fixed (float* yPtr = particle.Y)
+			fixed (float* vxPtr = particle.VX)
+			fixed (float* vyPtr = particle.VY)
 			{
-				var i = 0;
-				while (count-- > 0)
-				{
-					particle.X[i] += particle.VX[i] * elapsedSeconds;
-					particle.Y[i] += particle.VY[i] * elapsedSeconds;
+				var xDataPtr = xPtr;
+				var yDataPtr = yPtr;
+				var vxDataPtr = vxPtr;
+				var vyDataPtr = vyPtr;
 
-					i++;
+				for (var j = 0; j < count; j++)
+				{
+					*(xDataPtr + j) += *(vxDataPtr + j) * elapsedSeconds;
+					*(yDataPtr + j) += *(vyDataPtr + j) * elapsedSeconds;
 				}
 			}
 		}

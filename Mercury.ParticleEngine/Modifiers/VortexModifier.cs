@@ -10,26 +10,45 @@ namespace Mercury.ParticleEngine.Modifiers
 
 		protected internal override unsafe void Update(float elapsedSeconds, ref Particle particle, int count)
 		{
-			var i = 0;
-			while (count-- > 0)
+			fixed (float* xPtr = particle.X)
+			fixed (float* yPtr = particle.Y)
+			fixed (float* vxPtr = particle.VX)
+			fixed (float* vyPtr = particle.VY)
+			fixed (float* massPtr = particle.Mass)
 			{
-				var distX = Position._x - particle.X[i];
-				var distY = Position._y - particle.Y[i];
+				var x = xPtr;
+				var y = yPtr;
+				var vx = vxPtr;
+				var vy = vyPtr;
+				var mass = massPtr;
+				var globalMass = Mass;
+				var posX = Position._x;
+				var posY = Position._y;
 
-				var distance2 = (distX * distX) + (distY * distY);
-				var distance = (float)Math.Sqrt(distance2);
+				for (var j = 0; j < count; j++)
+				{
+					var distX = posX - *(x + j);
+					var distY = posY - *(y + j);
 
-				var m = (10000f * Mass * particle.Mass[i]) / distance2;
+					var distance2 = (distX * distX) + (distY * distY);
+					var distance = (float)Math.Sqrt(distance2);
 
-				m = Math.Max(Math.Min(m, MaxSpeed), -MaxSpeed) * elapsedSeconds;
+					var m = (10000f * globalMass * *(mass + j)) / distance2;
 
-				distX = (distX / distance) * m;
-				distY = (distY / distance) * m;
+					if (m > MaxSpeed)
+						m = MaxSpeed;
 
-				particle.VX[i] += distX;
-				particle.VY[i] += distY;
+					if (m < -MaxSpeed)
+						m = -MaxSpeed;
+					
+					m *= elapsedSeconds;
 
-				i++;
+					distX = (distX / distance) * m;
+					distY = (distY / distance) * m;
+
+					*(vx + j) += distX;
+					*(vy + j) += distY;
+				}
 			}
 		}
 	}
