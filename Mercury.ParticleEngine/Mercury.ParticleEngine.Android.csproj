@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{5BB1E4C5-3CE5-44A1-8A7F-4FB9AD4095F7}</ProjectGuid>
+    <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Mercury.ParticleEngine.Android</RootNamespace>
+    <AssemblyName>Mercury.ParticleEngine.Android</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <AndroidResgenFile>Resources\Resource.Designer.cs</AndroidResgenFile>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+    <AndroidUseLatestPlatformSdk>True</AndroidUseLatestPlatformSdk>
+    <TargetFrameworkVersion>v4.4</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Mono.Android" />
+    <Reference Include="mscorlib" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Axis.cs" />
+    <Compile Include="BlendMode.cs" />
+    <Compile Include="Colour.cs" />
+    <Compile Include="ColourRange.cs" />
+    <Compile Include="Coordinate.cs" />
+    <Compile Include="Emitter.cs" />
+    <Compile Include="Modifiers\Approximate.cs" />
+    <Compile Include="Modifiers\RotateToFaceDirectionModifier.cs" />
+    <Compile Include="Modifiers\ScaleModifier.cs" />
+    <Compile Include="Modifiers\YepppConstants.cs" />
+    <Compile Include="Modifiers\ModifierCollection.cs" />
+    <Compile Include="ModifierExecutionStrategy.cs" />
+    <Compile Include="Modifiers\ModifierSlot.cs" />
+    <Compile Include="Modifiers\AgeModifier.cs" />
+    <Compile Include="Modifiers\ColourInterpolator2.cs" />
+    <Compile Include="Modifiers\ContainerModifier.cs" />
+    <Compile Include="Modifiers\DragModifier.cs" />
+    <Compile Include="Modifiers\HueInterpolator2.cs" />
+    <Compile Include="Modifiers\LinearGravityModifier.cs" />
+    <Compile Include="Modifiers\MoveModifier.cs" />
+    <Compile Include="Modifiers\OpacityFastFadeModifier.cs" />
+    <Compile Include="Modifiers\VelocityHueModifier.cs" />
+    <Compile Include="Modifiers\VortexModifier.cs" />
+    <Compile Include="Modifiers\VelocityColourModifier.cs" />
+    <Compile Include="ParticleBuffer.cs" />
+    <Compile Include="Particle.cs" />
+    <Compile Include="Profiles\BoxProfile.cs" />
+    <Compile Include="Profiles\CircleProfile.cs" />
+    <Compile Include="Profiles\PointProfile.cs" />
+    <Compile Include="Profiles\Profile.cs" />
+    <Compile Include="Modifiers\Modifier.cs" />
+    <Compile Include="Profiles\BoxFillProfile.cs" />
+    <Compile Include="Profiles\RingProfile.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="FastRand.cs" />
+    <Compile Include="Range.cs" />
+    <Compile Include="RangeF.cs" />
+    <Compile Include="ReleaseParameters.cs" />
+    <Compile Include="Vector.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\Values\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

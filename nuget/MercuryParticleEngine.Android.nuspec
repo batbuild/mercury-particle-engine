@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package>
+    <metadata>
+        <id>@project@</id>
+        <version>@build.number@</version>
+        <authors>@authors@</authors>
+        <owners>@authors@</owners>
+        <title>@project@</title>
+        <projectUrl>https://github.com/batbuild/mercury-particle-engine</projectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <summary>@summary@</summary>
+         <tags>@tags@</tags>
+        <description>@description@</description>
+        <language>en-IE</language>
+    </metadata>    
+    <files>
+        <file src="..\Mercury.ParticleEngine\bin\Release\Mercury.ParticleEngine.Android.dll" target="lib/MonoAndroid" />                
+    </files>
+</package>
