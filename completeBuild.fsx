@@ -27,7 +27,7 @@ let info = {
   Description =  "Mercury particle engine for android (used in Duality)"
   Version = if isLocalBuild then "0.2-local" else "0.2."+buildVersion
 }
-
+let nugetPath = ".nuget/NuGet.exe"
 // Targets
 Target "Clean" (fun _ ->
     CleanDirs [buildDir; testDir; deployDir]
@@ -77,7 +77,7 @@ Target "NUnitTest" (fun _ ->
                    OutputFile = testDir + @"TestResults.xml"})
 )
 
-let nugetPath = ".build/NuGet.exe"
+
 
 Target "CreatePackage" (fun _ ->        
     NuGet (fun p -> 
